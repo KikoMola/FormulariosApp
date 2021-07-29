@@ -1,0 +1,60 @@
+<h2>Template: <small>Básicos</small></h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="guardar()" #miFormulario="ngForm" autocomplete="off">
+      <!-- Campo del producto -->
+      <div class="mb-3 row">
+        <label class="col-sm col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" placeholder="Nombre del producto" [ngModel]="initForm.producto" name="producto" required
+            minlength="3">
+          <span class="form-text text-danger" *ngIf="nombreValido()">
+            Debe de ser de 3 letras o más
+          </span>
+        </div>
+      </div>
+
+      <!-- Precio del producto -->
+      <div class="mb-3 row">
+        <label class="col-sm col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" placeholder="Precio del producto" [ngModel]="initForm.precio" name="precio" required>
+          <span class="form-text text-danger" *ngIf="precioValido()">
+            El precio debe ser mayor o igual a cero
+          </span>
+        </div>
+      </div>
+
+      <!-- Existencias del producto -->
+      <div class="mb-3 row">
+        <label class="col-sm col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" placeholder="Existencias" [ngModel]="initForm.existencias" name="existencias"
+            customMin [minimo]="0" required>
+        </div>
+      </div>
+
+      <!-- Boton -->
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end" [disabled]="miFormulario.invalid">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Pristine</span>
+    <pre>{{ miFormulario.pristine }}</pre>
+    <span>Touched</span>
+    <pre>{{ miFormulario.touched }}</pre>
+    <span>Valid</span>
+    <pre>{{ miFormulario.valid }}</pre>
+    <span>Value</span>
+    <pre>{{ miFormulario.value | json }}</pre>
+  </div>
+</div>
